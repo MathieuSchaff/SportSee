@@ -1,0 +1,9 @@
+@import '../../sass/mixins.scss';
+.AppContainer {
+  display: flex;
+  width: 100%;
+  height: calc(100vh - 9rem);
+  @include respond(minHeight) {
+    height: calc(100vh - 10rem);
+  }
+}

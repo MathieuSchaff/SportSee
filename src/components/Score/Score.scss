@@ -1,0 +1,46 @@
+@import '../../sass/mixins.scss';
+.score-image {
+  height: 60px;
+  width: 60px;
+}
+.score {
+  background-color: #fbfbfb;
+  height: 20%;
+  width: 258px;
+  border-radius: 5px;
+  padding: 32px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.0212249);
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  @include respond(tab-land) {
+    padding: 20px;
+    width: 200px;
+  }
+  img {
+    @include respond(tab-land) {
+      height: 45px;
+      width: 45px;
+    }
+  }
+}
+.score__title {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-left: 24px;
+  h2 {
+    font-weight: 700;
+    font-size: 2rem;
+    @include respond(tab-land) {
+      font-size: 1.8rem;
+    }
+  }
+  span {
+    font-size: 1.4rem;
+    font-weight: 500;
+    @include respond(tab-land) {
+      font-size: 1.2rem;
+    }
+  }
+}
