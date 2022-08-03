@@ -1,4 +1,6 @@
-@import '../../sass/variables';
+@import "../../sass/variables";
+@import "../../sass/mixins.scss";
+
 .objectifs {
   margin-top: 15px;
   font-family: Roboto;
@@ -12,4 +14,9 @@
   color: $secondary-color;
 }
 .title__container {
+  display: flex;
+  justify-content: space-between;
+  @include respond(mid-desktop) {
+    margin: 0 2%;
+  }
 }

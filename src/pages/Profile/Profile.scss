@@ -1,4 +1,4 @@
-@import '../../sass/mixins.scss';
+@import "../../sass/mixins.scss";
 .Acceuil {
   width: 100%;
   display: flex;
@@ -18,6 +18,9 @@
   @include respond(minHeight) {
     margin-top: 4rem;
   }
+  @include respond(mid-desktop) {
+    justify-content: space-around;
+  }
 }
 
 .Acceuil__leftBlock {
@@ -33,14 +36,3 @@
   justify-content: space-between;
   height: 45%;
 }
-// .Acceuil__card {
-//   height: 100%;
-//   width: 30%;
-//   min-width: 215px;
-//   max-width: 258px;
-//   background-color: black;
-//   border-radius: 5px;
-// }
-// .Acceuil__dayscore {
-//   width: 23%;
-// }

@@ -52,6 +52,11 @@ only screen is to avoid media queries are applied in case of printing for exampl
       @content;
     }
   }
+  @if $breakpoint == mid-desktop {
+    @media only screen and (min-width: 1600px) {
+      @content;
+    }
+  }
   @if $breakpoint == minHeight {
     @media only screen and (min-height: 820px) {
       @content;
