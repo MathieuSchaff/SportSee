@@ -13,16 +13,15 @@ import {
   ResponsiveContainer,
 } from "recharts";
 import { useParams } from "react-router-dom";
-import { ContentType as DefaultLegendContentType } from "recharts/types/component/DefaultLegendContent";
+import {
+  ContentType as DefaultLegendContentType,
+  Payload,
+} from "recharts/types/component/DefaultLegendContent";
 import { ContentType as TooltipContentType } from "recharts/types/component/Tooltip";
 
-// CETTE DONNE EST FETCH AVEC UN FETCH NORMAL ET LE SERVEUR EN ROUTE.
-// interface DataUserActivity {
-//   data: JsonUserActivity
-// }
 /**
  * The activity on the week of the user
- * @returns {JSX.Element} Activity component
+ * @component
  */
 export const Activity = () => {
   let { userId } = useParams();
@@ -32,7 +31,7 @@ export const Activity = () => {
   const { response, loading } = useAxios<JsonUserActivity>(
     {
       method: "GET",
-      url: `http://localhost:5173/user${userId}Data.json`,
+      url: `./user${userId}Data.json`,
       headers: {
         accept: "*/*",
       },
@@ -45,12 +44,11 @@ export const Activity = () => {
    */
   const newformatedData = new UserActivity(response?.userId, response?.sessions)
     .formatedData;
-  // problème ici
+
   /**
-   * show a tooltip on hover the graph
-   * @param {(Boolean | Undefined)}activity
-   * @param {typeof Payload<Number, String[]>} payload
-   * @returns {JSX.Element} CustomTooltip component
+   * @param {(boolean | undefined)} active
+   * @param {object} payload
+   * @component
    */
   const CustomTooltip: TooltipContentType<number, string> = ({
     active,
@@ -66,11 +64,10 @@ export const Activity = () => {
     }
     return null;
   };
-  // pb ici
   /**
    * This is the legend of the graph
-   * @param {Payload[]} payload
-   * @returns {JSX.Element} Title component
+   * @param {Array.<Object>} payload
+   * @component
    */
   const renderLegend: DefaultLegendContentType = ({ payload }) => {
     return (

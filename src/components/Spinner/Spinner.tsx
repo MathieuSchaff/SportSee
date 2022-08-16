@@ -1,4 +1,8 @@
-import './Spinner.scss'
+import "./Spinner.scss";
+/**
+ * Spinner component
+ * @component
+ */
 export function Spinner() {
   return (
     <div className="spinner__container">
@@ -9,5 +13,5 @@ export function Spinner() {
         <div></div>
       </div>
     </div>
-  )
+  );
 }

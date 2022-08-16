@@ -1,25 +1,18 @@
-import {lazy, Suspense} from 'react'
+import { lazy, Suspense } from "react";
 // Style
-import './AppContainer.scss'
+import "./AppContainer.scss";
 // utilities from react router dom
-import {Routes, Route, Navigate} from 'react-router-dom'
+import { Routes, Route, Navigate } from "react-router-dom";
 // COMPONENTS
-import {Spinner} from '../../components/Spinner/Spinner'
-import Acceuil from '../Acceuil/Acceuil'
+import { Spinner } from "../../components/Spinner/Spinner";
+import Acceuil from "../Acceuil/Acceuil";
 // import Profile from '../Profile/Profile'
 // import NotFound from '../NotFound/NotFound'
-import HorizontalNavBar from '../../components/HorizontalNavBar/HorizontalNavBar'
-import ChooseProfile from '../../components/ChooseProfile/ChooseProfile'
-/**
- * dynamic import
- * returns JSX.Element
- */
-const LazyNotFound = lazy(() => import('../NotFound/NotFound'))
-/**
- * dynamic import
- * returns JSX.Element
- */
-const LazyProfile = lazy(() => import('../Profile/Profile'))
+import HorizontalNavBar from "../../components/HorizontalNavBar/HorizontalNavBar";
+import ChooseProfile from "../../components/ChooseProfile/ChooseProfile";
+
+const LazyNotFound = lazy(() => import("../NotFound/NotFound"));
+const LazyProfile = lazy(() => import("../Profile/Profile"));
 
 /**
  * Contain the horizontal navigation bar on the left of the screen.
@@ -29,7 +22,7 @@ const LazyProfile = lazy(() => import('../Profile/Profile'))
  * But when a profile is chosen, it goes to /profile/:id
  * and it load the <Profile/> component instead
  *
- * @returns {JSX.Element} AppContainer component
+ * @component
  */
 const AppContainer = () => {
   return (
@@ -53,7 +46,7 @@ const AppContainer = () => {
         <Route path="*" element={<Navigate replace to="/404" />} />
       </Routes>
     </div>
-  )
-}
+  );
+};
 
-export default AppContainer
+export default AppContainer;

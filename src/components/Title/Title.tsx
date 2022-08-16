@@ -5,8 +5,8 @@ import { useContext } from "react";
 import { UserContext } from "../../context/Context";
 
 /**
- *
- * @returns {JSX.Element} Title component
+ * Title component
+ * @component
  */
 
 const Title = () => {

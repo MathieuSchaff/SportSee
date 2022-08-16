@@ -23,15 +23,12 @@ interface UserDataSessionProps {
   userId: number;
   sessions: ISession[];
 }
-// Pareil que activyty => pb avec cette data
-// interface UserSessionData {
-//   data: UserDataSessionProps
-// }
+
 /**
  * The graph of the session
- * @returns {JSX.Element} Session component
+ * @component
  */
-export const Session = (): JSX.Element => {
+export const Session = () => {
   /**
    * The params of the user in the url / profile/userId
    * used to fetch the good datas.
@@ -43,7 +40,7 @@ export const Session = (): JSX.Element => {
   const { response, loading } = useAxios<UserDataSessionProps>(
     {
       method: "GET",
-      url: `http://localhost:5173/user${userId}Data.json`,
+      url: `./user${userId}Data.json`,
       headers: {
         accept: "*/*",
       },
@@ -58,10 +55,9 @@ export const Session = (): JSX.Element => {
     : undefined;
   /**
    * Shhow the value on the hover of the graph
-   * @param {booleand  | undefined}active
-   * @param {<number | string>[]}payload
- * @returns {JSX.Element} CustomTooltip component
-
+   * @param {boolean | undefined} active
+   * @param {Array} payload
+   * @component
    */
   const CustomTooltip: TooltipContentType<number, string> = ({
     active,
@@ -77,16 +73,21 @@ export const Session = (): JSX.Element => {
   /**
    *
    * The legend of the graph
-   * @returns {JSX.Element} RenderLegend component
+   * @component
    */
-  const RenderLegend = (): JSX.Element => {
+  const RenderLegend = () => {
     return <h2 className="legend-session">Durée moyenne des sessions</h2>;
   };
   // PROBLEME ICI
   /**
    * Put a black rectangle with low opacity when the graph session is hover
-   * @param {Object} props
-   * @returns {JSX.Element} CustomTooltip component
+   * @param { Object } props
+   * @param { any } props.points
+   * @param { number } props.width
+   * @param { number } props.top
+   * @param { number } props.height
+   * @param { number } props.bottom
+   * @component
    */
   const CustomHover = (props: {
     points: any;

@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>JSDoc: Source: components/Activity/Activity.tsx</title>
+
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link
+      type="text/css"
+      rel="stylesheet"
+      href="styles/prettify-tomorrow.css"
+    />
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css" />
+  </head>
+
+  <body>
+    <div id="main">
+      <h1 class="page-title">Source: components/Activity/Activity.tsx</h1>
+
+      <section>
+        <article>
+          <pre
+            class="prettyprint source linenums"
+          ><code>import { ReactNode } from "react";
+import "./Activity.scss";
+import useAxios from "../../hooks/useAxios";
+import { JsonUserActivity, UserActivity } from "../../models/modelActivity";
+import {
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  Legend,
+  ResponsiveContainer,
+} from "recharts";
+import { useParams } from "react-router-dom";
+import {
+  ContentType as DefaultLegendContentType,
+  Payload,
+} from "recharts/types/component/DefaultLegendContent";
+import { ContentType as TooltipContentType } from "recharts/types/component/Tooltip";
+
+/**
+ * The activity on the week of the user
+ * @component
+ */
+export const Activity = () => {
+  let { userId } = useParams();
+  /**
+   * @param {String} userId - id passed in the url / /profile/:userId
+   */
+  const { response, loading } = useAxios&lt;JsonUserActivity>(
+    {
+      method: "GET",
+      url: `./user${userId}Data.json`,
+      headers: {
+        accept: "*/*",
+      },
+    },
+    "userActivity"
+  );
+
+  /**
+   * Format the data
+   */
+  const newformatedData = new UserActivity(response?.userId, response?.sessions)
+    .formatedData;
+
+  /**
+   * @param {(boolean | undefined)} active
+   * @param {object} payload
+   * @component
+   */
+  const CustomTooltip: TooltipContentType&lt;number, string> = ({
+    active,
+    payload,
+  }): ReactNode | null => {
+    if (active &amp;&amp; payload &amp;&amp; payload.length) {
+      return (
+        &lt;div className="customTooltip">
+          &lt;p>{`${payload[1].value} Kg`}&lt;/p>
+          &lt;p>{`${payload[0].value} Kcal`}&lt;/p>
+        &lt;/div>
+      );
+    }
+    return null;
+  };
+  /**
+   * This is the legend of the graph
+   * @param {Array.&lt;Object>} payload
+   * @component
+   */
+  const renderLegend: DefaultLegendContentType = ({ payload }) => {
+    return (
+      &lt;div className="activityLegend">
+        &lt;h2>Activité quotidienne&lt;/h2>
+        &lt;ul className="legend-ul">
+          {payload?.map((entry, index) => (
+            &lt;div className="legend-items" key={`item-${index}`}>
+              &lt;div className={`disc disc--${entry.value}`}>{""}&lt;/div>
+              &lt;li className={`legend-item legend-item--${entry.value}`}>
+                {entry.value === "calories"
+                  ? "Calories brûlées (kCal)"
+                  : "Poids (kg)"}
+              &lt;/li>
+            &lt;/div>
+          ))}
+        &lt;/ul>
+      &lt;/div>
+    );
+  };
+  return (
+    &lt;div className="activity">
+      {loading &amp;&amp; &lt;p>Loading...&lt;/p>}
+      {newformatedData &amp;&amp; (
+        &lt;ResponsiveContainer>
+          &lt;BarChart
+            data={newformatedData}
+            margin={{
+              top: 5,
+              right: 30,
+              left: 20,
+              bottom: 5,
+            }}
+            barSize={7}
+            barGap={8}
+            barCategoryGap="1%"
+          >
+            &lt;CartesianGrid strokeDasharray="3 3" vertical={false} />
+            &lt;XAxis
+              dataKey="day"
+              tickLine={false}
+              padding={{ left: 0, right: 0 }}
+              scale="auto"
+            />
+            &lt;YAxis yAxisId="left" orientation="left" stroke="#8884d8" hide />
+            &lt;YAxis
+              yAxisId="right"
+              orientation="right"
+              domain={[
+                (dataMin: number) => dataMin - 1,
+                (dataMax: number) => dataMax + 1,
+              ]}
+              allowDecimals={false}
+              axisLine={false}
+              tickLine={false}
+            />
+            &lt;Tooltip
+              wrapperStyle={{ background: "#E60000" }}
+              contentStyle={{
+                background: "#E60000",
+                border: "none",
+                borderRadius: "10px",
+              }}
+              content={CustomTooltip}
+            />
+            &lt;Legend content={renderLegend} verticalAlign="top" />
+            &lt;Bar yAxisId="left" dataKey="calories" fill="#E60000" />
+            &lt;Bar yAxisId="right" dataKey="kilogram" fill="#282D30" />
+          &lt;/BarChart>
+        &lt;/ResponsiveContainer>
+      )}
+    &lt;/div>
+  );
+};
+</code></pre>
+        </article>
+      </section>
+    </div>
+
+    <nav>
+      <h2><a href="index.html">Home</a></h2>
+      <h3>Classes</h3>
+      <ul>
+        <li><a href="Acceuil.html">Acceuil</a></li>
+        <li><a href="Activity.html">Activity</a></li>
+        <li><a href="Activity-CustomTooltip.html">CustomTooltip</a></li>
+        <li><a href="Activity-renderLegend.html">renderLegend</a></li>
+        <li><a href="App.html">App</a></li>
+        <li><a href="AppContainer.html">AppContainer</a></li>
+        <li><a href="ChooseProfile.html">ChooseProfile</a></li>
+        <li><a href="DayScores.html">DayScores</a></li>
+        <li><a href="Header.html">Header</a></li>
+        <li><a href="HorizontalNavBar.html">HorizontalNavBar</a></li>
+        <li><a href="module.exports.html">exports</a></li>
+        <li><a href="Performance.html">Performance</a></li>
+        <li><a href="Profile.html">Profile</a></li>
+        <li><a href="Score.html">Score</a></li>
+        <li><a href="Session.html">Session</a></li>
+        <li><a href="Session-CustomHover.html">CustomHover</a></li>
+        <li><a href="Session-CustomTooltip.html">CustomTooltip</a></li>
+        <li><a href="Session-RenderLegend.html">RenderLegend</a></li>
+        <li><a href="Spinner.html">Spinner</a></li>
+        <li><a href="Title.html">Title</a></li>
+        <li><a href="TodayScore.html">TodayScore</a></li>
+        <li><a href="UserActivity.html">UserActivity</a></li>
+        <li><a href="UserActivity_UserActivity.html">UserActivity</a></li>
+        <li><a href="UserDataSession.html">UserDataSession</a></li>
+        <li>
+          <a href="UserDataSession_UserDataSession.html">UserDataSession</a>
+        </li>
+        <li><a href="UserDataTodayScore.html">UserDataTodayScore</a></li>
+        <li>
+          <a href="UserDataTodayScore_UserDataTodayScore.html"
+            >UserDataTodayScore</a
+          >
+        </li>
+        <li><a href="UserPerformance.html">UserPerformance</a></li>
+        <li>
+          <a href="UserPerformance_UserPerformance.html">UserPerformance</a>
+        </li>
+        <li><a href="UserScore.html">UserScore</a></li>
+        <li><a href="UserScore_UserScore.html">UserScore</a></li>
+      </ul>
+      <h3>Global</h3>
+      <ul>
+        <li><a href="global.html#NotFound">NotFound</a></li>
+        <li><a href="global.html#useAxios">useAxios</a></li>
+      </ul>
+    </nav>
+
+    <br class="clear" />
+
+    <footer>
+      Documentation generated by
+      <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.11</a> on Tue Aug 16
+      2022 17:39:46 GMT+0200 (heure d’été d’Europe centrale)
+    </footer>
+
+    <script>
+      prettyPrint();
+    </script>
+    <script src="scripts/linenumber.js"></script>
+  </body>
+</html>

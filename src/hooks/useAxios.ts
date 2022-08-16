@@ -1,59 +1,53 @@
-import {useEffect, useState} from 'react'
-import {useNavigate} from 'react-router-dom'
-import axios, {AxiosRequestConfig} from 'axios'
-//A TESTER !!!!!
-
-import {JsonUserActivity} from '../models/modelActivity'
-import {UserDataSessionProps} from '../models/modelSession'
-import {PerfProps} from '../models/modelPerf'
-import {UserExempleProps} from '../context/Context'
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import axios, { AxiosRequestConfig } from "axios";
 
 export interface RequestResponse<T> {
-  response: T | undefined
-  loading: boolean
+  response: T | undefined;
+  loading: boolean;
 }
 interface DataFetched<T> {
-  averageSession?: T
-  mainData?: T
-  userActivity?: T
-  userPerf?: T
+  averageSession?: T;
+  mainData?: T;
+  userActivity?: T;
+  userPerf?: T;
 }
 
 /**
  * Custom hook to fetch data
  * it will give the component who fetch with this hook a loading value to wait for the data
- * @param {axiosParams} axiosParams
- * @returns { Object.<response: RequestResponse, loading: boolean>} RequestResponse - Objet that has loading and response as key
+ * @param {Object} axiosParams
+ * @returns {{response: Object, loading: boolean}} {response, loading} - Objet that has loading and response as key
  */
 const useAxios = <T extends any>(
   axiosParams: AxiosRequestConfig,
-  dataType: string,
+  dataType: string
 ): RequestResponse<T> => {
-  const navigate = useNavigate()
-  const [response, setResponse] = useState<T>()
-  const [loading, setLoading] = useState<boolean>(true)
+  const navigate = useNavigate();
+  const [response, setResponse] = useState<T>();
+  const [loading, setLoading] = useState<boolean>(true);
 
   const fetchData = async (params: AxiosRequestConfig) => {
     try {
-      const {data} = await axios.request<DataFetched<T>>(params)
-      setResponse(data[dataType as keyof typeof data])
+      const { data } = await axios.request<DataFetched<T>>(params);
+      setResponse(data[dataType as keyof typeof data]);
     } catch (error) {
       if (axios.isAxiosError(error)) {
-        console.error('Axios Error with Message: ' + error.message)
-        navigate('/404')
+        console.error("Axios Error with Message: " + error.message);
+        navigate("/404");
       } else {
-        console.error(error)
-        navigate('/404')
+        console.error(error);
+        navigate("/404");
       }
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
-  }
+  };
 
   useEffect(() => {
-    fetchData(axiosParams)
-  }, []) // execute once only
-  return {response, loading}
-}
+    fetchData(axiosParams);
+  }, []); // execute once only
+  return { response, loading };
+};
 
-export default useAxios
+export default useAxios;

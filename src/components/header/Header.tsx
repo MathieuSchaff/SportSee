@@ -1,18 +1,18 @@
-import './Header.scss'
-import Logo from '../../assets/logo.png'
-import {NavLink} from 'react-router-dom'
+import "./Header.scss";
+import Logo from "../../assets/logo.png";
+import { NavLink } from "react-router-dom";
 /**
  * Create a navbar, with only two active links on four LI included in the nav
- * @returns {JSX.Element} Header component
+ * @component
  */
 const Header = () => {
   /**
    * @param {boolean} isActive
    * @returns {String}
    */
-  const navLinkStyles = ({isActive}: {isActive: boolean}): string => {
-    return isActive ? 'navbar__links navbar__links--active ' : 'navbar__links'
-  }
+  const navLinkStyles = ({ isActive }: { isActive: boolean }): string => {
+    return isActive ? "navbar__links navbar__links--active " : "navbar__links";
+  };
   return (
     <header className="header">
       <img src={Logo} alt="Logo sport see" className="header__logo" />
@@ -33,7 +33,7 @@ const Header = () => {
         </ul>
       </nav>
     </header>
-  )
-}
+  );
+};
 
-export default Header
+export default Header;

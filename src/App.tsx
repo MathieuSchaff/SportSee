@@ -5,7 +5,7 @@ import Header from "./components/header/Header";
 
 /**
  * App contain the horizontal navbar at the top ( <Header/>) and the main bottom container (<AppContainer/>)
- * @returns {JSX.Element} App component
+ * @component
  */
 function App() {
   return (

@@ -1,35 +1,35 @@
-import './Score.scss'
+import "./Score.scss";
 
 // image proteines
-import proteinCount from '../../assets/proteinCount.png'
+import proteinCount from "../../assets/proteinCount.png";
 // images calories
-import calorieCount from '../../assets/calorieCount.png'
+import calorieCount from "../../assets/calorieCount.png";
 //images lipides
-import lipidCount from '../../assets/lipidCount.png'
+import lipidCount from "../../assets/lipidCount.png";
 // images glucides
-import carbohydrateCount from '../../assets/carbohydrateCount.png'
+import carbohydrateCount from "../../assets/carbohydrateCount.png";
 
 type ScoreProps = {
-  amount: string
-  name: string
-  link: string
-}
+  amount: string;
+  name: string;
+  link: string;
+};
 function goodImage(link: string) {
   switch (link) {
-    case 'carbohydrateCount':
-      return carbohydrateCount
+    case "carbohydrateCount":
+      return carbohydrateCount;
 
-    case 'lipidCount':
-      return lipidCount
+    case "lipidCount":
+      return lipidCount;
 
-    case 'calorieCount':
-      return calorieCount
+    case "calorieCount":
+      return calorieCount;
 
-    case 'proteinCount':
-      return proteinCount
+    case "proteinCount":
+      return proteinCount;
 
     default:
-      break
+      break;
   }
 }
 /**
@@ -37,10 +37,11 @@ function goodImage(link: string) {
  * @param {string} amount
  * @param {string} name
  * @param {string} link
- * @returns JSX.Element
+ * Score component
+ * @component
  */
-const Score = ({amount, name, link}: ScoreProps) => {
-  let src = goodImage(link)
+const Score = ({ amount, name, link }: ScoreProps) => {
+  let src = goodImage(link);
   return (
     <div className="score">
       <img src={src} alt={name} className="score-image" />
@@ -49,7 +50,7 @@ const Score = ({amount, name, link}: ScoreProps) => {
         <span>{name}</span>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Score
+export default Score;

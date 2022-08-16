@@ -27,46 +27,45 @@
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>// CONTENT
-import {useContext} from 'react'
-import {UserContext} from '../../context/Context'
+import { useContext } from "react";
+import { UserContext } from "../../context/Context";
 //STYLE
-import './TodayScore.scss'
+import "./TodayScore.scss";
 // COMPONENT
-import {PieChart, Pie, Cell, ResponsiveContainer} from 'recharts'
-import {UserDataTodayScore} from '../../models'
-const COLORS = ['#E60000', 'transparent']
+import { PieChart, Pie, Cell, ResponsiveContainer } from "recharts";
+import { UserDataTodayScore } from "../../models";
+const COLORS = ["#E60000", "transparent"];
 
 /**
- *  The scores of today in perce t
-   * @returns {JSX.Element} RenderLegend component
-
+ *  The scores of today in percent
+ * @component
  */
 export const TodayScore = () => {
   /**
    * Context of the user
    */
-  const context = useContext(UserContext)
+  const context = useContext(UserContext);
   /**
    * allow to access the good key on the data value becasuse they are different.
    */
   let todayScore =
-    context?.response?.todayScore ?? context?.response?.score ?? undefined
+    context?.response?.todayScore ?? context?.response?.score ?? undefined;
   /**
    * Formated data
    */
   const newformatedData =
     context?.response &amp;&amp; todayScore !== undefined
       ? new UserDataTodayScore(todayScore).formatedData
-      : undefined
+      : undefined;
   return (
     &lt;div className="containerTodayScore">
       {context?.loading &amp;&amp; !newformatedData &amp;&amp; &lt;p>Loading...&lt;/p>}
       {newformatedData &amp;&amp; (
         &lt;>
-          {' '}
+          {" "}
           &lt;h2 className="todayScore-title"> Score &lt;/h2>
           &lt;p className="todayScore-legend">
-            {' '}
+            {" "}
             &lt;span> {newformatedData[0].value}%&lt;/span> &lt;br>&lt;/br> de votre
             objectif
           &lt;/p>
@@ -83,9 +82,9 @@ export const TodayScore = () => {
                     &lt;Cell
                       key={`cell-${index}`}
                       fill={COLORS[index]}
-                      style={{display: `${index === 1 ? 'none' : 'inline'}`}}
+                      style={{ display: `${index === 1 ? "none" : "inline"}` }}
                     />
-                  )
+                  );
                 })}
               &lt;/Pie>
               &lt;circle cx="50%" cy="50%" r="30%" fill="white" />
@@ -94,8 +93,8 @@ export const TodayScore = () => {
         &lt;/>
       )}
     &lt;/div>
-  )
-}
+  );
+};
 </code></pre>
         </article>
     </section>
@@ -106,13 +105,13 @@ export const TodayScore = () => {
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#Acceuil">Acceuil</a></li><li><a href="global.html#App">App</a></li><li><a href="global.html#AppContainer">AppContainer</a></li><li><a href="global.html#DayScores">DayScores</a></li><li><a href="global.html#LazyNotFound">LazyNotFound</a></li><li><a href="global.html#LazyProfile">LazyProfile</a></li><li><a href="global.html#NotFound">NotFound</a></li><li><a href="global.html#Performance">Performance</a></li><li><a href="global.html#Profile">Profile</a></li><li><a href="global.html#Title">Title</a></li><li><a href="global.html#TodayScore">TodayScore</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Acceuil.html">Acceuil</a></li><li><a href="Activity.html">Activity</a></li><li><a href="Activity-CustomTooltip.html">CustomTooltip</a></li><li><a href="Activity-renderLegend.html">renderLegend</a></li><li><a href="App.html">App</a></li><li><a href="AppContainer.html">AppContainer</a></li><li><a href="ChooseProfile.html">ChooseProfile</a></li><li><a href="DayScores.html">DayScores</a></li><li><a href="Header.html">Header</a></li><li><a href="HorizontalNavBar.html">HorizontalNavBar</a></li><li><a href="module.exports.html">exports</a></li><li><a href="Performance.html">Performance</a></li><li><a href="Profile.html">Profile</a></li><li><a href="Score.html">Score</a></li><li><a href="Session.html">Session</a></li><li><a href="Session-CustomHover.html">CustomHover</a></li><li><a href="Session-CustomTooltip.html">CustomTooltip</a></li><li><a href="Session-RenderLegend.html">RenderLegend</a></li><li><a href="Spinner.html">Spinner</a></li><li><a href="Title.html">Title</a></li><li><a href="TodayScore.html">TodayScore</a></li><li><a href="UserActivity.html">UserActivity</a></li><li><a href="UserActivity_UserActivity.html">UserActivity</a></li><li><a href="UserDataSession.html">UserDataSession</a></li><li><a href="UserDataSession_UserDataSession.html">UserDataSession</a></li><li><a href="UserDataTodayScore.html">UserDataTodayScore</a></li><li><a href="UserDataTodayScore_UserDataTodayScore.html">UserDataTodayScore</a></li><li><a href="UserPerformance.html">UserPerformance</a></li><li><a href="UserPerformance_UserPerformance.html">UserPerformance</a></li><li><a href="UserScore.html">UserScore</a></li><li><a href="UserScore_UserScore.html">UserScore</a></li></ul><h3>Global</h3><ul><li><a href="global.html#NotFound">NotFound</a></li><li><a href="global.html#useAxios">useAxios</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.11</a> on Wed Aug 03 2022 17:19:41 GMT+0200 (heure d’été d’Europe centrale)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.11</a> on Tue Aug 16 2022 17:39:46 GMT+0200 (heure d’été d’Europe centrale)
 </footer>
 
 <script> prettyPrint(); </script>

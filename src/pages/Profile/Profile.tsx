@@ -14,7 +14,8 @@ import DayScores from "../../components/DayScores/DayScores";
 
 /**
  *  Main page of the user
- * @returns {JSX.Element} Profile component
+ * @component
+ *
  */
 const Profile = () => {
   /**

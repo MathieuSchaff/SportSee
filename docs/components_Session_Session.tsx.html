@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: components/Session/Session.tsx</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: components/Session/Session.tsx</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import { ReactNode, memo } from "react";
+import "./Session.scss";
+import {
+  LineChart,
+  Line,
+  XAxis,
+  YAxis,
+  Tooltip,
+  Legend,
+  ResponsiveContainer,
+} from "recharts";
+
+import useAxios from "../../hooks/useAxios";
+import { useParams } from "react-router-dom";
+
+import { ContentType as TooltipContentType } from "recharts/types/component/Tooltip";
+import { UserDataSession } from "../../models";
+interface ISession {
+  day: number | string;
+  sessionLength: number;
+}
+interface UserDataSessionProps {
+  userId: number;
+  sessions: ISession[];
+}
+
+/**
+ * The graph of the session
+ * @component
+ */
+export const Session = () => {
+  /**
+   * The params of the user in the url / profile/userId
+   * used to fetch the good datas.
+   */
+  let { userId } = useParams();
+  /**
+   * @param {String} userId - id passed in the url / /profile/:userId
+   */
+  const { response, loading } = useAxios&lt;UserDataSessionProps>(
+    {
+      method: "GET",
+      url: `http://localhost:5173/user${userId}Data.json`,
+      headers: {
+        accept: "*/*",
+      },
+    },
+    "averageSession"
+  );
+  /**
+   * formated data
+   */
+  const newformatedData = response
+    ? new UserDataSession(response?.userId, response?.sessions).formatedData
+    : undefined;
+  /**
+   * Shhow the value on the hover of the graph
+   * @param {boolean | undefined} active
+   * @param {Array} payload
+   * @component
+   */
+  const CustomTooltip: TooltipContentType&lt;number, string> = ({
+    active,
+    payload,
+  }): JSX.Element | null => {
+    if (active &amp;&amp; payload &amp;&amp; payload.length) {
+      return (
+        &lt;div className="custom-tooltipSession">{`${payload[0].value} min`}&lt;/div>
+      );
+    }
+    return null;
+  };
+  /**
+   *
+   * The legend of the graph
+   * @component
+   */
+  const RenderLegend = () => {
+    return &lt;h2 className="legend-session">Durée moyenne des sessions&lt;/h2>;
+  };
+  // PROBLEME ICI
+  /**
+   * Put a black rectangle with low opacity when the graph session is hover
+   * @param { Object } props
+   * @param { any } props.points
+   * @param { number } props.width
+   * @param { number } props.top
+   * @param { number } props.height
+   * @param { number } props.bottom
+   * @component
+   */
+  const CustomHover = (props: {
+    points: any;
+    width: number;
+    top: number;
+    height: number;
+    bottom: number;
+  }): JSX.Element => {
+    const { points, width, top, height, bottom } = props;
+    const calculatedHeight = top + height + bottom;
+    const rectWidth = width - points[0].x;
+    return (
+      &lt;rect
+        x={points[0].x}
+        y={2}
+        height={calculatedHeight}
+        width={rectWidth}
+        fill="#000000"
+        fillOpacity={0.1}
+      />
+    );
+  };
+  return (
+    &lt;div className="containerSession">
+      {loading &amp;&amp; !newformatedData &amp;&amp; &lt;p>Loading...&lt;/p>}
+      {newformatedData &amp;&amp; (
+        &lt;ResponsiveContainer width="100%" height="100%">
+          &lt;LineChart
+            data={newformatedData}
+            margin={{
+              top: 20,
+
+              bottom: 20,
+            }}
+          >
+            &lt;XAxis
+              dataKey="day"
+              axisLine={false}
+              tickLine={false}
+              stroke="#ffffff"
+              tick={{
+                fill: "#ffffff",
+                fontSize: "12px",
+                stroke: "#ffffff",
+                strokeWidth: "1px",
+              }}
+              interval="preserveStartEnd"
+              width={240}
+              className="x-axisToto"
+            />
+            &lt;YAxis
+              hide
+              domain={[
+                (dataMin: number) => dataMin - 10,
+                (dataMax: number) => dataMax + 10,
+              ]}
+            />
+            &lt;Tooltip
+              wrapperStyle={{ background: "#ffffff" }}
+              content={CustomTooltip}
+              //@ts-ignore
+              cursor={&lt;CustomHover />}
+            />
+
+            &lt;Legend
+              content={RenderLegend}
+              verticalAlign="top"
+              margin={{ top: 0, left: 34, right: 0, bottom: 0 }}
+            />
+            &lt;Line
+              type="natural"
+              dataKey="sessionLength"
+              stroke="#ffffff"
+              strokeWidth="2px"
+              legendType="none"
+              dot={false}
+            />
+          &lt;/LineChart>
+        &lt;/ResponsiveContainer>
+      )}
+    &lt;/div>
+  );
+};
+export const SessionMemoized = memo(Session);
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Acceuil.html">Acceuil</a></li><li><a href="Activity.html">Activity</a></li><li><a href="Activity-CustomTooltip.html">CustomTooltip</a></li><li><a href="Activity-renderLegend.html">renderLegend</a></li><li><a href="App.html">App</a></li><li><a href="AppContainer.html">AppContainer</a></li><li><a href="ChooseProfile.html">ChooseProfile</a></li><li><a href="DayScores.html">DayScores</a></li><li><a href="Header.html">Header</a></li><li><a href="HorizontalNavBar.html">HorizontalNavBar</a></li><li><a href="module.exports.html">exports</a></li><li><a href="Performance.html">Performance</a></li><li><a href="Profile.html">Profile</a></li><li><a href="Score.html">Score</a></li><li><a href="Session.html">Session</a></li><li><a href="Session-CustomHover.html">CustomHover</a></li><li><a href="Session-CustomTooltip.html">CustomTooltip</a></li><li><a href="Session-RenderLegend.html">RenderLegend</a></li><li><a href="Spinner.html">Spinner</a></li><li><a href="Title.html">Title</a></li><li><a href="TodayScore.html">TodayScore</a></li><li><a href="UserActivity.html">UserActivity</a></li><li><a href="UserActivity_UserActivity.html">UserActivity</a></li><li><a href="UserDataSession.html">UserDataSession</a></li><li><a href="UserDataSession_UserDataSession.html">UserDataSession</a></li><li><a href="UserDataTodayScore.html">UserDataTodayScore</a></li><li><a href="UserDataTodayScore_UserDataTodayScore.html">UserDataTodayScore</a></li><li><a href="UserPerformance.html">UserPerformance</a></li><li><a href="UserPerformance_UserPerformance.html">UserPerformance</a></li><li><a href="UserScore.html">UserScore</a></li><li><a href="UserScore_UserScore.html">UserScore</a></li></ul><h3>Global</h3><ul><li><a href="global.html#NotFound">NotFound</a></li><li><a href="global.html#useAxios">useAxios</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.11</a> on Tue Aug 16 2022 17:39:46 GMT+0200 (heure d’été d’Europe centrale)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

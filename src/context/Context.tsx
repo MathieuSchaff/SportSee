@@ -18,10 +18,7 @@ export interface UserExempleProps {
   score?: number;
   keyData: KeydataProps;
 }
-/**
- * Create the context for the user at the route http://localhost:5173/user/${userId}`
- * @returns null | <RequestResponse<UserExempleProps>
- */
+
 export const UserContext =
   React.createContext<RequestResponse<UserExempleProps> | null>(null);
 interface UserContextProviderProps {
@@ -33,20 +30,16 @@ interface UserContextProviderProps {
  * Allow nested children to access the same data
  * @param {ReactNode} children
  * @param {String} userId
- * @returns JSX.Element
+ * @component
  */
 export default function UserContextProvider({
   children,
   userId,
 }: UserContextProviderProps) {
-  /**
-   * fetch the data of the user , name etc
-   * @returns {response typeof <RequestResponse<UserExempleProps>, loading: boolean}
-   */
   const { response, loading } = useAxios<UserExempleProps>(
     {
       method: "GET",
-      url: `http://localhost:5173/user${userId}Data.json`,
+      url: `./user${userId}Data.json`,
       headers: {
         accept: "*/*",
       },

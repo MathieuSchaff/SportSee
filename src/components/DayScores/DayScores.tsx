@@ -1,14 +1,14 @@
-import './DayScores.scss'
-import Score from '../Score/Score'
-import {useContext} from 'react'
-import {UserContext} from '../../context/Context'
-import {UserScore} from '../../models'
+import "./DayScores.scss";
+import Score from "../Score/Score";
+import { useContext } from "react";
+import { UserContext } from "../../context/Context";
+import { UserScore } from "../../models";
 /**
- *
- * @returns {JSX.Element} DayScores component
+ * Day Sxore component wrapper
+ * @component
  */
 const DayScores = () => {
-  const context = useContext(UserContext)
+  const context = useContext(UserContext);
   // const {response, loading} = useContext(UserContext)
   // destructuration possible ici ?
   // const {calorieCount, proteinCount, carbohydrateCount, lipidCount} =
@@ -19,9 +19,9 @@ const DayScores = () => {
         context?.response?.keyData?.calorieCount,
         context?.response?.keyData?.proteinCount,
         context?.response?.keyData?.carbohydrateCount,
-        context?.response?.keyData?.lipidCount,
+        context?.response?.keyData?.lipidCount
       ).formatedData
-    : undefined
+    : undefined;
 
   return (
     <div className="day-scores">
@@ -36,10 +36,10 @@ const DayScores = () => {
               name={item.name}
               link={item.src}
             />
-          )
+          );
         })}
     </div>
-  )
-}
+  );
+};
 
-export default DayScores
+export default DayScores;

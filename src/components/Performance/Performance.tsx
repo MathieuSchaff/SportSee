@@ -13,7 +13,7 @@ import { memo } from "react";
 
 /**
  *  The graph that show the data with a radar type chart
- * @returns JSX.Element
+ * @component
  */
 
 export function Performance() {
@@ -25,7 +25,7 @@ export function Performance() {
   const { response, loading } = useAxios<UserPerformance>(
     {
       method: "GET",
-      url: `http://localhost:5173/user${userId}Data.json`,
+      url: `./user${userId}Data.json`,
       headers: {
         accept: "*/*",
       },

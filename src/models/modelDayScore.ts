@@ -1,27 +1,27 @@
 // retourner une array de keydata qui contient des object avec les scores
 interface InterfacekeyData {
-  calorieCount: number
-  proteinCount: number
-  carbohydrateCount: number
-  lipidCount: number
+  calorieCount: number;
+  proteinCount: number;
+  carbohydrateCount: number;
+  lipidCount: number;
 }
 interface IDataKey {
-  data: InterfacekeyData
+  data: InterfacekeyData;
 }
 type FormatedObjectUserScore = {
-  name: string
-  amount: string
-  src: string
-}
+  name: string;
+  amount: string;
+  src: string;
+};
 /**
  * Represents the score data of the user
  * @constructor
  */
 export class UserScore implements InterfacekeyData {
-  calorieCount: number
-  proteinCount: number
-  carbohydrateCount: number
-  lipidCount: number
+  calorieCount: number;
+  proteinCount: number;
+  carbohydrateCount: number;
+  lipidCount: number;
   /**
    *
    * @param {number}calorieCount
@@ -33,32 +33,36 @@ export class UserScore implements InterfacekeyData {
     calorieCount: number,
     proteinCount: number,
     carbohydrateCount: number,
-    lipidCount: number,
+    lipidCount: number
   ) {
-    this.calorieCount = calorieCount
-    this.proteinCount = proteinCount
-    this.carbohydrateCount = carbohydrateCount
-    this.lipidCount = lipidCount
+    this.calorieCount = calorieCount;
+    this.proteinCount = proteinCount;
+    this.carbohydrateCount = carbohydrateCount;
+    this.lipidCount = lipidCount;
   }
   /**
    * take all scores in params and format them to have an easier access to the objects to implement the component score.
-   * @returns FormatedObjectUserScore[]
+   * @returns {Array} data
    */
   get formatedData(): FormatedObjectUserScore[] {
     let array = [
       {
-        name: 'Calories',
+        name: "Calories",
         amount: `${this.calorieCount}Kcal`,
-        src: 'calorieCount',
+        src: "calorieCount",
       },
-      {name: 'Proteins', amount: `${this.proteinCount}g`, src: 'proteinCount'},
       {
-        name: 'Glucides',
-        amount: `${this.carbohydrateCount}g`,
-        src: 'carbohydrateCount',
+        name: "Proteins",
+        amount: `${this.proteinCount}g`,
+        src: "proteinCount",
       },
-      {name: 'Lipides', amount: `${this.lipidCount}g`, src: 'lipidCount'},
-    ]
-    return array
+      {
+        name: "Glucides",
+        amount: `${this.carbohydrateCount}g`,
+        src: "carbohydrateCount",
+      },
+      { name: "Lipides", amount: `${this.lipidCount}g`, src: "lipidCount" },
+    ];
+    return array;
   }
 }
