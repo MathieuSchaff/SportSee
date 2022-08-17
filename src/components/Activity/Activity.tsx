@@ -31,7 +31,7 @@ export const Activity = () => {
   const { response, loading } = useAxios<JsonUserActivity>(
     {
       method: "GET",
-      url: `./user${userId}Data.json`,
+      url: `../user${userId}Data.json`,
       headers: {
         accept: "*/*",
       },

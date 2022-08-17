@@ -25,7 +25,7 @@ export function Performance() {
   const { response, loading } = useAxios<UserPerformance>(
     {
       method: "GET",
-      url: `./user${userId}Data.json`,
+      url: `../user${userId}Data.json`,
       headers: {
         accept: "*/*",
       },

@@ -39,7 +39,7 @@ export default function UserContextProvider({
   const { response, loading } = useAxios<UserExempleProps>(
     {
       method: "GET",
-      url: `./user${userId}Data.json`,
+      url: `../user${userId}Data.json`,
       headers: {
         accept: "*/*",
       },

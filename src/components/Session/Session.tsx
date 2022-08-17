@@ -40,7 +40,7 @@ export const Session = () => {
   const { response, loading } = useAxios<UserDataSessionProps>(
     {
       method: "GET",
-      url: `./user${userId}Data.json`,
+      url: `../user${userId}Data.json`,
       headers: {
         accept: "*/*",
       },
