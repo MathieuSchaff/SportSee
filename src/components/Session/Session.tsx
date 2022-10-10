@@ -37,16 +37,19 @@ export const Session = () => {
   /**
    * @param {String} userId - id passed in the url / /profile/:userId
    */
-  const { response, loading } = useAxios<UserDataSessionProps>(
-    {
-      method: "GET",
-      url: `../user${userId}Data.json`,
-      headers: {
-        accept: "*/*",
-      },
+
+  let env = "prod";
+  const url =
+    env === "prod"
+      ? `http://localhost:3000/user/${userId}/average-sessions`
+      : `../public/user/${userId}/session.json`;
+  const { response, loading } = useAxios<UserDataSessionProps>({
+    method: "GET",
+    url: `${url}`,
+    headers: {
+      accept: "*/*",
     },
-    "averageSession"
-  );
+  });
   /**
    * formated data
    */

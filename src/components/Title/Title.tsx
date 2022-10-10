@@ -14,7 +14,6 @@ const Title = () => {
    * get the data of the user from the context
    */
   const context = useContext(UserContext);
-  const firstName = context?.response?.userInfos.firstName ?? undefined;
   return (
     <div className="title__container">
       {context?.loading ? (
@@ -26,7 +25,9 @@ const Title = () => {
               {" "}
               <h1>
                 Bonjour,
-                <span className="red">{firstName}</span>
+                <span className="red">
+                  {context?.response?.userInfos.firstName}
+                </span>
               </h1>
               <p className="objectifs">
                 Félicitation ! Vous avez explosé vos objectifs hier 👏{" "}

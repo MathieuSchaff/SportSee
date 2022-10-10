@@ -22,16 +22,19 @@ export function Performance() {
    * to fetch the good data
    */
   let { userId } = useParams();
-  const { response, loading } = useAxios<UserPerformance>(
-    {
-      method: "GET",
-      url: `../user${userId}Data.json`,
-      headers: {
-        accept: "*/*",
-      },
+
+  let env = "prod";
+  const url =
+    env === "prod"
+      ? `http://localhost:3000/user/${userId}/performance`
+      : `../public/user/${userId}/performance.json`;
+  const { response, loading } = useAxios<UserPerformance>({
+    method: "GET",
+    url: `${url}`,
+    headers: {
+      accept: "*/*",
     },
-    "userPerf"
-  );
+  });
   /**
    * the formated data
    */

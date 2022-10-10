@@ -18,7 +18,7 @@ export interface UserExempleProps {
   score?: number;
   keyData: KeydataProps;
 }
-
+// export interface mainData =
 export const UserContext =
   React.createContext<RequestResponse<UserExempleProps> | null>(null);
 interface UserContextProviderProps {
@@ -36,16 +36,20 @@ export default function UserContextProvider({
   children,
   userId,
 }: UserContextProviderProps) {
-  const { response, loading } = useAxios<UserExempleProps>(
-    {
-      method: "GET",
-      url: `../user${userId}Data.json`,
-      headers: {
-        accept: "*/*",
-      },
+  let env = "prod";
+  const url =
+    env === "prod"
+      ? `http://localhost:3000/user/${userId}`
+      : `../public/user/${userId}/mainData.json`;
+  const { response, loading } = useAxios<UserExempleProps>({
+    method: "GET",
+    url: `${url}`,
+    headers: {
+      accept: "*/*",
     },
-    "mainData"
-  );
+  });
+
+  console.log(response);
   return (
     <UserContext.Provider value={{ response, loading }}>
       {children}

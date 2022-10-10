@@ -9,10 +9,6 @@ import { UserScore } from "../../models";
  */
 const DayScores = () => {
   const context = useContext(UserContext);
-  // const {response, loading} = useContext(UserContext)
-  // destructuration possible ici ?
-  // const {calorieCount, proteinCount, carbohydrateCount, lipidCount} =
-  //   context?.response?.data?.keyData.
 
   const newformatedData = context?.response
     ? new UserScore(
@@ -22,7 +18,7 @@ const DayScores = () => {
         context?.response?.keyData?.lipidCount
       ).formatedData
     : undefined;
-
+  console.log(context?.response?.keyData);
   return (
     <div className="day-scores">
       {context?.loading && !context?.response && <p>Loading...</p>}

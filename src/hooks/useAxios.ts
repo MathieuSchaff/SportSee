@@ -12,7 +12,9 @@ interface DataFetched<T> {
   userActivity?: T;
   userPerf?: T;
 }
-
+interface DataFetched<T> {
+  data?: T;
+}
 /**
  * Custom hook to fetch data
  * it will give the component who fetch with this hook a loading value to wait for the data
@@ -20,8 +22,7 @@ interface DataFetched<T> {
  * @returns {{response: Object, loading: boolean}} {response, loading} - Objet that has loading and response as key
  */
 const useAxios = <T extends any>(
-  axiosParams: AxiosRequestConfig,
-  dataType: string
+  axiosParams?: AxiosRequestConfig
 ): RequestResponse<T> => {
   const navigate = useNavigate();
   const [response, setResponse] = useState<T>();
@@ -30,8 +31,9 @@ const useAxios = <T extends any>(
   const fetchData = async (params: AxiosRequestConfig) => {
     try {
       const { data } = await axios.request<DataFetched<T>>(params);
-      setResponse(data[dataType as keyof typeof data]);
+      setResponse(data.data);
     } catch (error) {
+      navigate("/404");
       if (axios.isAxiosError(error)) {
         console.error("Axios Error with Message: " + error.message);
         navigate("/404");
