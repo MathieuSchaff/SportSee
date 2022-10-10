@@ -27,23 +27,24 @@ const useAxios = <T extends any>(
   const navigate = useNavigate();
   const [response, setResponse] = useState<T>();
   const [loading, setLoading] = useState<boolean>(true);
-
+  const [error, setError] = useState<boolean>(false);
   const fetchData = async (params: AxiosRequestConfig) => {
     try {
       const { data } = await axios.request<DataFetched<T>>(params);
       setResponse(data.data);
     } catch (error) {
       navigate("/notfound");
-      throw new Error("Cannot get data");
-      // if (axios.isAxiosError(error)) {
-      //   console.error("Axios Error with Message: " + error.message);
-      //   navigate("/notfound");
-      // } else {
-      //   console.error(error);
-      //   navigate("/notfound");
-      // }
+      setError(true);
+      if (axios.isAxiosError(error)) {
+        console.error("Axios Error with Message: " + error.message);
+      } else {
+        console.error(error);
+      }
     } finally {
       setLoading(false);
+      if (loading === false && error === true) {
+        navigate("/notfound");
+      }
     }
   };
 
