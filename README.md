@@ -22,15 +22,23 @@ You will need to clone the main repo that you see in this github project and fol
 #### 2.1 Prerequisites
 
 - [NodeJS (**version 12.18**)](https://nodejs.org/en/)
+- YARN
 
 If you are working with several versions of NodeJS, we recommend you install [nvm](https://github.com/nvm-sh/nvm). This tool will allow you to easily manage your NodeJS versions.
 
 ##### 2.2 Launching the project
 
-- Fork the repository
+- Fork the repository [BACKEND](https://github.com/OpenClassrooms-Student-Center/P9-front-end-dashboard)
 - Clone it on your computer.
 - The `npm install` command will allow you to install the dependencies.
 - The `npm run dev` command will allow you to run the micro API.
+
+##### 2.3 Launching the project
+
+- Fork the repository of the backend
+- Clone it on your computer.
+- The `yarn` command will allow you to install the dependencies.
+- The `yarn dev` command will allow you to run the micro API.
 
 #### 3. Endpoints
 
