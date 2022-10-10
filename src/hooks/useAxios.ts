@@ -33,14 +33,16 @@ const useAxios = <T extends any>(
       const { data } = await axios.request<DataFetched<T>>(params);
       setResponse(data.data);
     } catch (error) {
-      navigate("/404");
-      if (axios.isAxiosError(error)) {
-        console.error("Axios Error with Message: " + error.message);
-        navigate("/404");
-      } else {
-        console.error(error);
-        navigate("/404");
-      }
+      navigate("/notfound");
+
+      throw new Error("Cannot get data");
+      // if (axios.isAxiosError(error)) {
+      //   console.error("Axios Error with Message: " + error.message);
+      //   navigate("/notfound");
+      // } else {
+      //   console.error(error);
+      //   navigate("/notfound");
+      // }
     } finally {
       setLoading(false);
     }

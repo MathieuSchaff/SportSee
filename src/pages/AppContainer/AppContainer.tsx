@@ -42,8 +42,8 @@ const AppContainer = () => {
             }
           />
         </Route>
-        <Route path="/404" element={<LazyNotFound />} />
-        <Route path="*" element={<Navigate replace to="/404" />} />
+        <Route path="/notfound" element={<LazyNotFound />} />
+        <Route path="*" element={<Navigate replace to="/notfound" />} />
       </Routes>
     </div>
   );
