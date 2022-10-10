@@ -31,11 +31,11 @@ export const Activity = () => {
    * @param {String} userId - id passed in the url / /profile/:userId
    */
 
-  let env = "prod";
+  let env = "dev";
   const url =
     env === "prod"
       ? `http://localhost:3000/user/${userId}/activity`
-      : `../public/user/${userId}/activity.json`;
+      : `../user/${userId}/activity.json`;
   const { response, loading } = useAxios<JsonUserActivity>({
     method: "GET",
     url: `${url}`,

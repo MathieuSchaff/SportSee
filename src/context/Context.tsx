@@ -36,11 +36,11 @@ export default function UserContextProvider({
   children,
   userId,
 }: UserContextProviderProps) {
-  let env = "prod";
+  let env = "dev";
   const url =
     env === "prod"
       ? `http://localhost:3000/user/${userId}`
-      : `../public/user/${userId}/mainData.json`;
+      : `../user/${userId}/mainData.json`;
   const { response, loading } = useAxios<UserExempleProps>({
     method: "GET",
     url: `${url}`,
@@ -49,7 +49,6 @@ export default function UserContextProvider({
     },
   });
 
-  console.log(response);
   return (
     <UserContext.Provider value={{ response, loading }}>
       {children}

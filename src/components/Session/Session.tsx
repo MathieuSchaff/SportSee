@@ -40,9 +40,9 @@ export const Session = () => {
 
   let env = "prod";
   const url =
-    env === "prod"
+    env === "dev"
       ? `http://localhost:3000/user/${userId}/average-sessions`
-      : `../public/user/${userId}/session.json`;
+      : `../user/${userId}/session.json`;
   const { response, loading } = useAxios<UserDataSessionProps>({
     method: "GET",
     url: `${url}`,

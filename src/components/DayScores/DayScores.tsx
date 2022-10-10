@@ -18,7 +18,6 @@ const DayScores = () => {
         context?.response?.keyData?.lipidCount
       ).formatedData
     : undefined;
-  console.log(context?.response?.keyData);
   return (
     <div className="day-scores">
       {context?.loading && !context?.response && <p>Loading...</p>}
