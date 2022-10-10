@@ -34,7 +34,6 @@ const useAxios = <T extends any>(
       setResponse(data.data);
     } catch (error) {
       navigate("/notfound");
-
       throw new Error("Cannot get data");
       // if (axios.isAxiosError(error)) {
       //   console.error("Axios Error with Message: " + error.message);
