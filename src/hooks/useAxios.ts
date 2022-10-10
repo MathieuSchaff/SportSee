@@ -22,7 +22,7 @@ interface DataFetched<T> {
  * @returns {{response: Object, loading: boolean}} {response, loading} - Objet that has loading and response as key
  */
 const useAxios = <T extends any>(
-  axiosParams?: AxiosRequestConfig
+  axiosParams: AxiosRequestConfig
 ): RequestResponse<T> => {
   const navigate = useNavigate();
   const [response, setResponse] = useState<T>();
