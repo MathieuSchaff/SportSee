@@ -29,9 +29,11 @@ const useAxios = <T extends any>(axiosParams: string): RequestResponse<T> => {
   const [error, setError] = useState<boolean>(false);
   const fetchData = async (params: string) => {
     try {
-      console.log(params);
       const response = await axiosCustomUser(params);
 
+      if (response.status >= 300) {
+        throw new Error();
+      }
       setResponse(response.data.data);
     } catch (error) {
       if (axios.isAxiosError(error)) {
@@ -41,7 +43,6 @@ const useAxios = <T extends any>(axiosParams: string): RequestResponse<T> => {
         console.error(error);
         navigate("/404");
       }
-      console.error("entré dans catch");
     } finally {
       setLoading(false);
     }
