@@ -31,16 +31,8 @@ const useAxios = <T extends any>(axiosParams: string): RequestResponse<T> => {
     try {
       console.log(params);
       const response = await axiosCustomUser(params);
-      // const response = await axios.request<DataFetched<T>>(params);
-      setResponse(response.data.data);
 
-      // console.log(data);
-      // if(response.status())
-      // axios.get("/user/12345", {
-      //   validateStatus: function (status) {
-      //     return status < 300; // Resolve only if the status code is less than 500
-      //   },
-      // });
+      setResponse(response.data.data);
     } catch (error) {
       if (axios.isAxiosError(error)) {
         console.error("Axios Error with Message: " + error.message);
