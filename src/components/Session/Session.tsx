@@ -38,18 +38,12 @@ export const Session = () => {
    * @param {String} userId - id passed in the url / /profile/:userId
    */
 
-  let env = "prod";
-  const url =
-    env === "dev"
-      ? `http://localhost:3000/user/${userId}/average-sessions`
-      : `../user/${userId}/session.json`;
-  const { response, loading } = useAxios<UserDataSessionProps>({
-    method: "GET",
-    url: `${url}`,
-    headers: {
-      accept: "*/*",
-    },
-  });
+  let endPoint =
+    import.meta.env.MODE === "development"
+      ? `${userId}/average-sessions`
+      : `${userId}/session.json`;
+
+  const { response, loading } = useAxios<UserDataSessionProps>(`/${endPoint}`);
   /**
    * formated data
    */

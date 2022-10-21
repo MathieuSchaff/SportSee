@@ -23,18 +23,11 @@ export function Performance() {
    */
   let { userId } = useParams();
 
-  let env = "dev";
-  const url =
-    env === "prod"
-      ? `http://localhost:3000/user/${userId}/performance`
-      : `../user/${userId}/performance.json`;
-  const { response, loading } = useAxios<UserPerformance>({
-    method: "GET",
-    url: `${url}`,
-    headers: {
-      accept: "*/*",
-    },
-  });
+  let endPoint =
+    import.meta.env.MODE === "development"
+      ? `${userId}/performance`
+      : `${userId}/performance.json`;
+  const { response, loading } = useAxios<UserPerformance>(`/${endPoint}`);
   /**
    * the formated data
    */

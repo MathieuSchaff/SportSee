@@ -27,11 +27,12 @@ const useAxios = <T extends any>(axiosParams: string): RequestResponse<T> => {
   const [response, setResponse] = useState<T>();
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<boolean>(false);
+  console.log(axiosParams);
   const fetchData = async (params: string) => {
     try {
-      const response = await axiosCustomUser(axiosParams);
+      console.log(params);
+      const response = await axiosCustomUser(params);
       // const response = await axios.request<DataFetched<T>>(params);
-
       setResponse(response.data.data);
 
       // console.log(data);

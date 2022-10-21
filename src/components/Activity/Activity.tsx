@@ -31,18 +31,14 @@ export const Activity = () => {
    * @param {String} userId - id passed in the url / /profile/:userId
    */
 
-  let env = "dev";
-  const url =
-    env === "prod"
-      ? `http://localhost:3000/user/${userId}/activity`
-      : `../user/${userId}/activity.json`;
-  const { response, loading, error } = useAxios<JsonUserActivity>({
-    method: "GET",
-    url: `${url}`,
-    headers: {
-      accept: "*/*",
-    },
-  });
+  let endPoint =
+    import.meta.env.MODE === "development"
+      ? `${userId}/activity`
+      : `${userId}/activity.json`;
+
+  const { response, loading, error } = useAxios<JsonUserActivity>(
+    `/${endPoint}`
+  );
 
   /**
    * Format the data

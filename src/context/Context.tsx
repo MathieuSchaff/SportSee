@@ -50,11 +50,14 @@ export default function UserContextProvider({
   //     accept: "*/*",
   //   },
   // });
+  let endPoint =
+    import.meta.env.MODE === "development"
+      ? `${userId}`
+      : `${userId}/mainData.json`;
+  console.log(typeof endPoint);
   const { response, loading, error } = useAxios<UserExempleProps>(
-    `/${userId}/mainData.json`
+    `/${endPoint}`
   );
-  // });
-  console.log(import.meta.env);
 
   return (
     <UserContext.Provider value={{ response, loading, error }}>
