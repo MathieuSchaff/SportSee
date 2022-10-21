@@ -11,7 +11,7 @@ import Acceuil from "../Acceuil/Acceuil";
 import HorizontalNavBar from "../../components/HorizontalNavBar/HorizontalNavBar";
 import ChooseProfile from "../../components/ChooseProfile/ChooseProfile";
 
-const LazyNotFound = lazy(() => import("../NotFound/NotFound"));
+import NotFound from "../NotFound/NotFound";
 const LazyProfile = lazy(() => import("../Profile/Profile"));
 
 /**
@@ -42,7 +42,7 @@ const AppContainer = () => {
             }
           />
         </Route>
-        <Route path="/404" element={<LazyNotFound />} />
+        <Route path="/404" element={<NotFound />} />
         <Route path="*" element={<Navigate replace to="/404" />} />
       </Routes>
     </div>

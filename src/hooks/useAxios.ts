@@ -31,7 +31,7 @@ const useAxios = <T extends any>(axiosParams: string): RequestResponse<T> => {
     try {
       const response = await axiosCustomUser(params);
 
-      if (response.status >= 300) {
+      if (!response.data.data) {
         throw new Error();
       }
       setResponse(response.data.data);
