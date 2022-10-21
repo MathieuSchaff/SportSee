@@ -37,24 +37,10 @@ export default function UserContextProvider({
   children,
   userId,
 }: UserContextProviderProps) {
-  // let env = "prod";
-  // const url =
-  //   env === "dev"
-  //     ? `http://localhost:3000/user/${userId}`
-  //     : `../user/${userId}/mainData.json`;
-
-  // const { response, loading, error } = useAxios<UserExempleProps>({
-  //   method: "GET",
-  //   url: `${url}`,
-  //   headers: {
-  //     accept: "*/*",
-  //   },
-  // });
   let endPoint =
     import.meta.env.MODE === "development"
       ? `${userId}`
       : `${userId}/mainData.json`;
-  console.log(typeof endPoint);
   const { response, loading, error } = useAxios<UserExempleProps>(
     `/${endPoint}`
   );

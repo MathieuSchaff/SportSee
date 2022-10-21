@@ -27,7 +27,6 @@ const useAxios = <T extends any>(axiosParams: string): RequestResponse<T> => {
   const [response, setResponse] = useState<T>();
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<boolean>(false);
-  console.log(axiosParams);
   const fetchData = async (params: string) => {
     try {
       console.log(params);
