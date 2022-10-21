@@ -14,7 +14,7 @@ import {
   Legend,
   ResponsiveContainer,
 } from "recharts";
-import { useParams } from "react-router-dom";
+import { Navigate, useParams } from "react-router-dom";
 import {
   ContentType as DefaultLegendContentType,
   Payload,
@@ -36,7 +36,7 @@ export const Activity = () => {
     env === "prod"
       ? `http://localhost:3000/user/${userId}/activity`
       : `../user/${userId}/activity.json`;
-  const { response, loading } = useAxios<JsonUserActivity>({
+  const { response, loading, error } = useAxios<JsonUserActivity>({
     method: "GET",
     url: `${url}`,
     headers: {

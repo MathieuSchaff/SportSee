@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios, { AxiosRequestConfig } from "axios";
-
+import axiosCustomUser from "../axios/custom.js";
 export interface RequestResponse<T> {
   response: T | undefined;
   loading: boolean;
+  error?: boolean;
 }
 interface DataFetched<T> {
   averageSession?: T;
@@ -21,37 +22,43 @@ interface DataFetched<T> {
  * @param {Object} axiosParams
  * @returns {{response: Object, loading: boolean}} {response, loading} - Objet that has loading and response as key
  */
-const useAxios = <T extends any>(
-  axiosParams: AxiosRequestConfig
-): RequestResponse<T> => {
+const useAxios = <T extends any>(axiosParams: string): RequestResponse<T> => {
   const navigate = useNavigate();
   const [response, setResponse] = useState<T>();
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<boolean>(false);
-  const fetchData = async (params: AxiosRequestConfig) => {
+  const fetchData = async (params: string) => {
     try {
-      const { data } = await axios.request<DataFetched<T>>(params);
-      setResponse(data.data);
+      const response = await axiosCustomUser(axiosParams);
+      // const response = await axios.request<DataFetched<T>>(params);
+
+      setResponse(response.data.data);
+
+      // console.log(data);
+      // if(response.status())
+      // axios.get("/user/12345", {
+      //   validateStatus: function (status) {
+      //     return status < 300; // Resolve only if the status code is less than 500
+      //   },
+      // });
     } catch (error) {
-      navigate("/notfound");
-      setError(true);
       if (axios.isAxiosError(error)) {
         console.error("Axios Error with Message: " + error.message);
+        navigate("/404");
       } else {
         console.error(error);
+        navigate("/404");
       }
+      console.error("entré dans catch");
     } finally {
       setLoading(false);
-      if (loading === false && error === true) {
-        navigate("/notfound");
-      }
     }
   };
 
   useEffect(() => {
     fetchData(axiosParams);
   }, []); // execute once only
-  return { response, loading };
+  return { response, loading, error };
 };
 
 export default useAxios;

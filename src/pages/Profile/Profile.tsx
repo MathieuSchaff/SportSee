@@ -28,7 +28,7 @@ const Profile = () => {
     <>
       <div className="Acceuil">
         <UserContextProvider userId={userId}>
-          <Title />
+          {/* <Title />
           <div className="Acceuil__wrapper">
             <div className="Acceuil__leftBlock">
               <Activity />
@@ -39,7 +39,7 @@ const Profile = () => {
               </div>
             </div>
             <DayScores />
-          </div>
+          </div> */}
         </UserContextProvider>{" "}
       </div>
     </>

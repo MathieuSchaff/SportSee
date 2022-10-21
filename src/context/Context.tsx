@@ -1,4 +1,5 @@
 import React, { ReactNode } from "react";
+import { Navigate } from "react-router-dom";
 import useAxios, { RequestResponse } from "../hooks/useAxios";
 type UserInfos = {
   firstName: string;
@@ -36,21 +37,27 @@ export default function UserContextProvider({
   children,
   userId,
 }: UserContextProviderProps) {
-  let env = "dev";
-  const url =
-    env === "prod"
-      ? `http://localhost:3000/user/${userId}`
-      : `../user/${userId}/mainData.json`;
-  const { response, loading } = useAxios<UserExempleProps>({
-    method: "GET",
-    url: `${url}`,
-    headers: {
-      accept: "*/*",
-    },
-  });
+  // let env = "prod";
+  // const url =
+  //   env === "dev"
+  //     ? `http://localhost:3000/user/${userId}`
+  //     : `../user/${userId}/mainData.json`;
+
+  // const { response, loading, error } = useAxios<UserExempleProps>({
+  //   method: "GET",
+  //   url: `${url}`,
+  //   headers: {
+  //     accept: "*/*",
+  //   },
+  // });
+  const { response, loading, error } = useAxios<UserExempleProps>(
+    `/${userId}/mainData.json`
+  );
+  // });
+  console.log(import.meta.env);
 
   return (
-    <UserContext.Provider value={{ response, loading }}>
+    <UserContext.Provider value={{ response, loading, error }}>
       {children}
     </UserContext.Provider>
   );
