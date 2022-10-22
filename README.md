@@ -30,12 +30,6 @@ If you are working with several versions of NodeJS, we recommend you install [nv
 
 - Fork the repository [BACKEND](https://github.com/OpenClassrooms-Student-Center/P9-front-end-dashboard)
 - Clone it on your computer.
-- The `npm install` command will allow you to install the dependencies.
-- The `npm run dev` command will allow you to run the micro API.
-
-##### 2.3 Launching the project
-
-- Fork the repository of the backend
 - Clone it on your computer.
 - The `yarn` command will allow you to install the dependencies.
 - The `yarn dev` command will allow you to run the micro API.
@@ -51,11 +45,14 @@ The data are in the public folder in json files.
 
 This project includes four endpoints that you will be able to use:
 
-- `http://localhost:5173/user${userId}Data.json` - retrieves information from a user.
+- `http://localhost:5173/user/${userId}/mainData.json` - retrieves information from a user.
+- `http://localhost:5173/user/${userId}/performance.json` - retrieves information from a user performance.
+- `http://localhost:5173/user/${userId}/session.json` - retrieves information from a user session of the week.
+- `http://localhost:5173/user/${userId}/activity.json` - retrieves information from a user activity of the week.
 
 ##### 3.2 Examples of queries
 
-- `http://localhost:5173/user18Data.json` - Retrieves the data of the user with id 18
+- `http://localhost:5173/user/18/mainData.json` - Retrieves the data of the user with id 18
 
 ## Available Scripts
 
