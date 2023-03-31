@@ -4,7 +4,7 @@
 
 # SportSee : the app to improve your body
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project is hosted on netlify: https://sportsee-schaff.netlify.app/
 
 ## Technologies
 
